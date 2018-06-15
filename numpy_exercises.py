@@ -1,7 +1,7 @@
 #### 1. Import the numpy package under the name `np` (★☆☆)
 
 import numpy as np
-import timeit
+
 
 #### 2. Print the numpy version and the configuration (★☆☆)
 
@@ -306,31 +306,112 @@ C
 
 #### 35. How to compute ((A+B)\*(-A/2)) in place (without copy)? (★★☆)
 
+A = np.ones(3)*1
+B = np.ones(3)*2
+C = np.ones(3)*3
 
+np.add(A, B, out=B)
+np.divide(A, 2, out=A)
+np.negative(A, out=A)
+np.multiply(A,B, out=A)
 
 #### 36. Extract the integer part of a random array using 5 different methods (★★☆)
 
+help(np.random.rand)
+C = np.random.rand(3,2)
+C
 
+#1
+C1 = np.floor(C)
+C1
+
+#2
+C2 = C-(C%1)
+C2
+
+#3
+C3 = np.ceil(C-1)
+C3
+
+#4
+np.info(np.trunc)
+C4 = np.trunc(C)
+C4
+
+#5
+C5 = C.astype(int)
+C5
 
 #### 37. Create a 5x5 matrix with row values ranging from 0 to 4 (★★☆)
 
+#my sol
+help(np.array)
+help(np.ogrid)
+mgrid = np.lib.index_tricks.nd_grid()
+Y = mgrid[0:5,0:5]
+Z = Y[1]
+Z
 
+#the smart solution
+Z = np.zeros((5,5))
+Z
+Z += np.arange(5)
+print(Z)
 
 #### 38. Consider a generator function that generates 10 integers and use it to build an array (★☆☆)
 
-
+help(np.fromiter)
+iterable = (x for x in range(10))
+A = np.fromiter(iterable, int)
+A
 
 #### 39. Create a vector of size 10 with values ranging from 0 to 1, both excluded (★★☆)
 
+#isn't the question poorly formulated or does ranging imply equally spaced out?
+v = np.random.rand(10,1)
+v
 
+help(np.linspace)
+#I don't know how to exclude the startpoint and still have it be div in 10
+v = np.linspace(0,1,11,endpoint=False)[1:] #well, that makes sense, they're still
+#equally spaced out though not div 10
+print(Z)
+Z[0]
+1 - Z[9]
 
 #### 40. Create a random vector of size 10 and sort it (★★☆)
 
+v = np.random.rand(10)
+help(np.sort)
+v = np.sort(v)
+v
 
+#or
+
+Z = np.random.random(10)
+Z.sort()
+print(Z)
 
 #### 41. How to sum a small array faster than np.sum? (★★☆)
 
+#TODO: find how to compare runtime
 
+
+import time
+
+J = np.arange(10)
+
+help(np.add.reduce)
+
+start = time.time()
+F = np.add.reduce(J)
+end = time.time()
+print(10000000*(end - start))
+
+start = time.time()
+S = np.sum(J)
+end = time.time()
+print(10000000*(end - start)
 
 #### 42. Consider two random array A and B, check if they are equal (★★☆)
 
