@@ -2,7 +2,6 @@
 
 import numpy as np
 
-
 #### 2. Print the numpy version and the configuration (★☆☆)
 
 print(np.__version__,np.show_config)
@@ -394,9 +393,6 @@ print(Z)
 
 #### 41. How to sum a small array faster than np.sum? (★★☆)
 
-#TODO: find how to compare runtime
-
-
 import time
 
 J = np.arange(10)
@@ -405,29 +401,72 @@ help(np.add.reduce)
 
 start = time.time()
 F = np.add.reduce(J)
-end = time.time()
-print(10000000*(end - start))
+print (time.clock() - start)
 
-start = time.time()
+start = time.clock()
 S = np.sum(J)
-end = time.time()
-print(10000000*(end - start)
+print (time.clock() - start)
+
 
 #### 42. Consider two random array A and B, check if they are equal (★★☆)
 
+A = np.random.randint(0,2,5)
+B = np.random.randint(0,2,5)
+
+(A==B).all()
+
+#or
+
+# Assuming identical shape of the arrays and a tolerance for the comparison of values
+
+help(np.allclose)
+equal = np.allclose(A,B)
+print(equal)
+
+# Checking both the shape and the element values, no tolerance (values have to be exactly equal)
+
+equal = np.array_equal(A,B)
+print(equal)
 
 
 #### 43. Make an array immutable (read-only) (★★☆)
 
-
+Y = np.arange(10)
+Y.flags.writeable = False
+Y[0] = 1
 
 #### 44. Consider a random 10x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)
 
+import math
 
+C = np.random.randint(0, 11, (10,2))
+C
+
+start = time.clock()
+P = np.zeros((10,2))
+for i in range(10):
+    P[i,0] = np.sqrt((C[i,0])**2+(C[i,1])**2)
+    P[i,1] = math.atan2(C[i,1],C[i,0])
+P
+print(time.clock() - start)
+
+#or their solution, mine is faster in this case, but I suspect it might not
+#scale so well.
+
+start = time.clock()
+X,Y = C[:,0], C[:,1]
+R = np.sqrt(X**2+Y**2)
+T = np.arctan2(Y,X)
+print(R)
+print(T)
+print(time.clock() - start)
 
 #### 45. Create random vector of size 10 and replace the maximum value by 0 (★★☆)
 
-
+T = np.random.rand(10)
+T
+T[T.argmax()] = 0
+T
 
 #### 46. Create a structured array with `x` and `y` coordinates covering the \[0,1\]x\[0,1\] area (★★☆)
 
