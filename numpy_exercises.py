@@ -480,13 +480,11 @@ Z
 
 ####  47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj))
 
-A = np.arange(12,32)
-B = np.arange(5)
-
-C = np.zeros((len(A),len(B)))
-C[i,j] = 1/(A[i] - B[j])
+X = np.arange(8)
+Y = X + 0.5
+C = 1.0 / np.subtract.outer(A, B)
+print(np.linalg.det(C))
 C
-
 
 #### 48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)
 
