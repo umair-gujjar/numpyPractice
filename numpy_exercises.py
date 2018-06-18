@@ -488,15 +488,43 @@ C
 
 #### 48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)
 
+help(np.iinfo)
 
+for dtype in [np.int16, np.int32, np.int64]:
+    print(np.iinfo(dtype).min)
+    print(np.iinfo(dtype).max)
+
+for dtype in [np.float16, np.float32, np.float64]:
+    print(np.finfo(dtype).min)
+    print(np.finfo(dtype).max)
+    print(np.finfo(dtype).eps)
 
 #### 49. How to print all the values of an array? (★★☆)
 
+help(np.set_printoptions)
 
+Y = np.arange(np.random.randint(0, 10, (1,1))) #array with random length
+Y
+
+np.set_printoptions(threshold=len(Y))
+
+#or their solution
+
+np.set_printoptions(threshold=np.nan)
+Z = np.zeros((16,16))
+print(Z)
 
 #### 50. How to find the closest value (to a given scalar) in a vector? (★★☆)
 
+np.set_printoptions(threshold = 1000)
 
+help(np.argmin)
+
+Z = np.arange(100)
+v = np.random.uniform(0,100)
+v
+index = (np.abs(Z-v)).argmin()
+print(Z[index])
 
 #### 51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)
 
