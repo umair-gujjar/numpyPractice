@@ -399,7 +399,9 @@ J = np.arange(10)
 
 help(np.add.reduce)
 
-start = time.time()
+import time
+
+start = time.clock()
 F = np.add.reduce(J)
 print (time.clock() - start)
 
@@ -470,10 +472,20 @@ T
 
 #### 46. Create a structured array with `x` and `y` coordinates covering the \[0,1\]x\[0,1\] area (★★☆)
 
-
+help(np.meshgrid)
+Z = np.zeros((5,5), [('x',float),('y',float)])
+Z['x'], Z['y'] = np.meshgrid(np.linspace(0,1,5),
+                             np.linspace(0,1,5))
+Z
 
 ####  47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj))
 
+A = np.arange(12,32)
+B = np.arange(5)
+
+C = np.zeros((len(A),len(B)))
+C[i,j] = 1/(A[i] - B[j])
+C
 
 
 #### 48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)
