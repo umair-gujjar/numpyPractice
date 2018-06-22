@@ -528,24 +528,54 @@ print(Z[index])
 
 #### 51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)
 
+#TODO: Understand what and what for.
 
+Z = np.zeros(10, [ ('position', [ ('x', float, 1),
+                                  ('y', float, 1)]),
+                   ('color',    [ ('r', float, 1),
+                                  ('g', float, 1),
+                                  ('b', float, 1)])])
 
 #### 52. Consider a random vector with shape (100,2) representing coordinates, find point by point distances (★★☆)
 
+v = np.random.rand(100,2)
+v
 
+x,y = np.atleast_2d(v[:,0],v[:,1])
+
+D = np.sqrt((x-x.T)**2 + (y-y.T)**2)
+D
+
+#According to solution it can be done faster with:
+
+import scipy
+import scipy.spatial
+
+Z = np.random.random((10,2))
+D = scipy.spatial.distance.cdist(Z,Z)
+print(D)
 
 #### 53. How to convert a float (32 bits) array into an integer (32 bits) in place?
 
+help(np.random.randn)
 
+Z = np.random.randn(10,2)
+Z
+
+Z.astype(int, copy = False)
 
 #### 54. How to read the following file? (★★☆)
 
+help(np.genfromtxt)
 
-```
-1, 2, 3, 4, 5
-6,  ,  , 7, 8
- ,  , 9,10,11
-```
+from io import StringIO
+
+# Fake file
+s = StringIO("""1, 2, 3, 4, 5\n
+                6,  ,  , 7, 8\n
+                 ,  , 9,10,11\n""")
+Z = np.genfromtxt(s, delimiter=",", dtype=np.int)
+print(Z)
 
 #### 55. What is the equivalent of enumerate for numpy arrays? (★★☆)
 
